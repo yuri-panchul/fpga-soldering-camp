@@ -1,0 +1,22 @@
+set_global_assignment -name DEVICE                    EPM240T100I5
+
+set_global_assignment -name NUM_PARALLEL_PROCESSORS   4
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY  .
+
+set_global_assignment -name TOP_LEVEL_ENTITY          top
+set_global_assignment -name SEARCH_PATH               ..
+set_global_assignment -name SYSTEMVERILOG_FILE        top.sv
+
+set_location_assignment PIN_52 -to in_a[1]
+set_location_assignment PIN_53 -to in_a[0]
+set_location_assignment PIN_50 -to in_b[1]
+set_location_assignment PIN_51 -to in_b[0]
+
+set_location_assignment PIN_38 -to out_sum_signed[3]
+set_location_assignment PIN_39 -to out_sum_signed[2]
+set_location_assignment PIN_36 -to out_sum_signed[1]
+set_location_assignment PIN_37 -to out_sum_signed[0]
+set_location_assignment PIN_34 -to out_sum_unsigned[3]
+set_location_assignment PIN_35 -to out_sum_unsigned[2]
+set_location_assignment PIN_30 -to out_sum_unsigned[1]
+set_location_assignment PIN_33 -to out_sum_unsigned[0]
