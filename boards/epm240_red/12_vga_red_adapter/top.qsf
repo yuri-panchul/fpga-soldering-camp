@@ -1,0 +1,79 @@
+set_global_assignment -name DEVICE                    EPM240T100I5
+
+set_global_assignment -name NUM_PARALLEL_PROCESSORS   4
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY  .
+
+set_global_assignment -name TOP_LEVEL_ENTITY          top
+set_global_assignment -name SEARCH_PATH               ..
+set_global_assignment -name SYSTEMVERILOG_FILE        top.sv
+set_global_assignment -name SDC_FILE                  ../top.sdc
+
+set_global_assignment -name SYSTEMVERILOG_FILE        top.sv
+set_global_assignment -name SYSTEMVERILOG_FILE        vga.sv
+
+set_location_assignment PIN_64  -to clk
+set_location_assignment PIN_72  -to rst_n
+
+set_location_assignment PIN_73  -to key[2]
+set_location_assignment PIN_70  -to key[1]
+set_location_assignment PIN_71  -to key[0]
+
+set_location_assignment PIN_56  -to led[7]
+set_location_assignment PIN_57  -to led[6]
+set_location_assignment PIN_54  -to led[5]
+set_location_assignment PIN_55  -to led[4]
+set_location_assignment PIN_52  -to led[3]
+set_location_assignment PIN_53  -to led[2]
+set_location_assignment PIN_50  -to led[1]
+set_location_assignment PIN_51  -to led[0]
+
+set_location_assignment PIN_78  -to hsync
+set_location_assignment PIN_76  -to vsync
+
+set_location_assignment PIN_17  -to red[2]
+set_location_assignment PIN_86  -to red[3]
+set_location_assignment PIN_87  -to red[4]
+set_location_assignment PIN_16  -to red[5]
+set_location_assignment PIN_19  -to red[6]
+set_location_assignment PIN_21  -to red[7]
+
+set_location_assignment PIN_96  -to green[2]
+set_location_assignment PIN_100 -to green[3]
+set_location_assignment PIN_12  -to green[4]
+set_location_assignment PIN_14  -to green[5]
+set_location_assignment PIN_83  -to green[6]
+set_location_assignment PIN_85  -to green[7]
+
+set_location_assignment PIN_82  -to blue[2]
+set_location_assignment PIN_6   -to blue[3]
+set_location_assignment PIN_8   -to blue[4]
+set_location_assignment PIN_3   -to blue[5]
+set_location_assignment PIN_1   -to blue[6]
+set_location_assignment PIN_98  -to blue[7]
+
+set_location_assignment PIN_74  -to vcc_for_vga[0]
+
+# The following two pins are supposed to be 5V
+
+set_location_assignment PIN_75  -to vcc_for_vga[1]
+set_location_assignment PIN_77  -to vcc_for_vga[2]
+
+set_location_assignment PIN_92  -to vcc_for_vga[3]
+
+set_location_assignment PIN_81  -to gnd_for_vga[0]
+set_location_assignment PIN_84  -to gnd_for_vga[1]
+set_location_assignment PIN_89  -to gnd_for_vga[2]
+set_location_assignment PIN_97  -to gnd_for_vga[3]
+set_location_assignment PIN_2   -to gnd_for_vga[4]
+set_location_assignment PIN_7   -to gnd_for_vga[5]
+set_location_assignment PIN_15  -to gnd_for_vga[6]
+set_location_assignment PIN_20  -to gnd_for_vga[7]
+
+                      # PIN_18  unused
+                      # PIN_4   I2C
+                      # PIN_5   I2C
+                      # PIN_88  unused
+                      # PIN_90  unused
+                      # PIN_91  unused
+                      # PIN_95  unused
+                      # PIN_99  unused

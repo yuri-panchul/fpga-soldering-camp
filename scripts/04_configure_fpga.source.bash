@@ -1,7 +1,7 @@
 scripts_dir=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 
 [ -z "${setup_source_bash_already_run-}" ] && \
-. $(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/00_setup.source.bash
+. "$scripts_dir/00_setup.source.bash"
 
 is_command_available_or_error quartus_pgm " from Intel FPGA Quartus Prime package"
 
@@ -24,9 +24,9 @@ quartus_pgm -l &> cable_list
 CABLE_NAME_1=$(set +o pipefail; grep "1) " cable_list | sed 's/.*1) //')
 CABLE_NAME_2=$(set +o pipefail; grep "2) " cable_list | sed 's/.*2) //')
 
-if [ -n "$CABLE_NAME_1" ]
+if [ -n "${CABLE_NAME_1-}" ]
 then
-    if [ -n "$CABLE_NAME_2" ]
+    if [ -n "${CABLE_NAME_2-}" ]
     then
         warning "more than one cable is connected: $CABLE_NAME_1 and $CABLE_NAME_2"
     fi

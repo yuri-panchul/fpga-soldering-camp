@@ -74,9 +74,24 @@ INTELFPGA_INSTALL_DIR=intelFPGA_lite
 QUESTA_DIR=questa_fse
 QUARTUS_DIR=quartus
 
+if    [ -n "${QUARTUS_HOME-}" ]  \
+   && [ -d "$QUARTUS_HOME/$INTELFPGA_INSTALL_DIR" ]
+then
+    INTELFPGA_INSTALL_PARENT_DIR="$QUARTUS_HOME"
+fi
+
 if [ "$OSTYPE" = "linux-gnu" ]
 then
-    INTELFPGA_INSTALL_PARENT_DIR="$HOME"
+    if [ -z "${INTELFPGA_INSTALL_PARENT_DIR-}" ]
+    then
+        INTELFPGA_INSTALL_PARENT_DIR="$HOME"
+    fi
+
+    if ! [ -d "$INTELFPGA_INSTALL_PARENT_DIR/$INTELFPGA_INSTALL_DIR" ]
+    then
+        INTELFPGA_INSTALL_PARENT_DIR_FIRST="$INTELFPGA_INSTALL_PARENT_DIR"
+        INTELFPGA_INSTALL_PARENT_DIR=/opt
+    fi
 
     QUESTA_BIN_DIR=bin
     QUESTA_LIB_DIR=linux_x86_64
@@ -91,7 +106,10 @@ then
 elif  [ "$OSTYPE" = "cygwin"    ]  \
    || [ "$OSTYPE" = "msys"      ]
 then
-    INTELFPGA_INSTALL_PARENT_DIR=/c
+    if [ -z "${INTELFPGA_INSTALL_PARENT_DIR-}" ]
+    then
+        INTELFPGA_INSTALL_PARENT_DIR=/c
+    fi
 
     QUESTA_BIN_DIR=win64
     QUESTA_LIB_DIR=win64
@@ -106,10 +124,21 @@ else
     error "this script does not support your OS '$OSTYPE'"
 fi
 
+#-----------------------------------------------------------------------------
+
 if ! [ -d "$INTELFPGA_INSTALL_PARENT_DIR/$INTELFPGA_INSTALL_DIR" ]
 then
-    error "expected to find '$INTELFPGA_INSTALL_DIR' directory"  \
-          " in '$INTELFPGA_INSTALL_PARENT_DIR'"
+    if [ -z "${INTELFPGA_INSTALL_PARENT_DIR_FIRST-}" ]
+    then
+        error "expected to find '$INTELFPGA_INSTALL_DIR' directory"  \
+              "in '$INTELFPGA_INSTALL_PARENT_DIR'."                  \
+              "'$INTELFPGA_INSTALL_DIR' location can be set by the environment variable QUARTUS_HOME"
+    else
+        error "expected to find '$INTELFPGA_INSTALL_DIR' directory"  \
+              "either in '$INTELFPGA_INSTALL_PARENT_DIR_FIRST'"      \
+              "or in '$INTELFPGA_INSTALL_PARENT_DIR'."               \
+              "'$INTELFPGA_INSTALL_DIR' location can be set by the environment variable QUARTUS_HOME"
+    fi
 fi
 
 #-----------------------------------------------------------------------------
@@ -131,20 +160,14 @@ FIRST_VERSION_DIR=$($FIND_COMMAND -quit)
 
 if [ -z "${FIRST_VERSION_DIR-}" ]
 then
-    error "cannot find any version of Intel FPGA installed in "  \
+    error "cannot find any version of Intel FPGA installed in"  \
           "'$INTELFPGA_INSTALL_PARENT_DIR/$INTELFPGA_INSTALL_DIR'"
 fi
 
 #-----------------------------------------------------------------------------
 
 export QUESTA_ROOTDIR="$FIRST_VERSION_DIR/$QUESTA_DIR"
-
-if [ -z "${PATH-}" ]
-then
-    export PATH="$QUESTA_ROOTDIR/$QUESTA_BIN_DIR"
-else
-    export PATH="$PATH:$QUESTA_ROOTDIR/$QUESTA_BIN_DIR"
-fi
+export PATH="${PATH:+$PATH:}$QUESTA_ROOTDIR/$QUESTA_BIN_DIR"
 
 if [ -z "${LD_LIBRARY_PATH-}" ]
 then
@@ -154,7 +177,7 @@ else
 fi
 
 export QUARTUS_ROOTDIR="$FIRST_VERSION_DIR/$QUARTUS_DIR"
-export PATH="$PATH:$QUARTUS_ROOTDIR/$QUARTUS_BIN_DIR"
+export PATH="${PATH:+$PATH:}$QUARTUS_ROOTDIR/$QUARTUS_BIN_DIR"
 
 #-----------------------------------------------------------------------------
 

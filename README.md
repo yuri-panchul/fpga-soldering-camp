@@ -40,9 +40,16 @@ Image is taken from [http://iemontiel.blogspot.com/2015/07/mi-aventura-para-elab
   * Переходники для плат - выбрать "гнездо-гнездо" 10 сантиметров:
 [купить в США](https://aliexpress.us/item/3256804425682359.html)
 и [в России](https://aliexpress.ru/item/1005004937144019.html)
+  * Переходник к разъему VGA:
+[купить в США](https://www.aliexpress.us/item/3256801343762247.html)
+и [в России](https://aliexpress.ru/item/1005001530076999.html)
+и [еще в России](https://aliexpress.ru/item/1005004335937730.html)
+  * Более дешевый переходник к разъему VGA (еще не проверен):
+[купить в США](https://www.aliexpress.us/item/2251832615945702.html)
+и [в России](https://aliexpress.ru/item/1005003270029676.html)
 * Оборудование для пайки
   * [Паяльная станция Hakko FX888D](https://www.amazon.com/Hakko-FX888D-23BY-Digital-Soldering-Station/dp/B00ANZRT4M)
-  * [Очки с увеличительным стеклом для пайка](https://www.amazon.com/dp/B07ZCH3SL4)
+  * [Очки с увеличительным стеклом для пайки](https://www.amazon.com/dp/B07ZCH3SL4)
   * [Припой 63/37 с пропорцией оптимальной для поддержаний стабильной температуры](https://www.amazon.com/dp/B075WBDYZZ)
   * [Лента для снятия припоя](https://www.amazon.com/dp/B094GZ6CPZ)
 * Загружаемые SSD диски, чтобы не устанавливать программное обеспечение во время занятий
